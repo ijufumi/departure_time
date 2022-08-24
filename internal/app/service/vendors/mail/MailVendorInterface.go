@@ -1,4 +1,4 @@
-package mail_vendor
+package mail
 
 type MailVendorInterface interface {
 	Send(contents MailContents) error

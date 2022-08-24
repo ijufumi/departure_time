@@ -1,4 +1,4 @@
-package mail_vendor
+package mail
 
 type amazonSESService struct {
 }
