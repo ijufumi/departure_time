@@ -9,13 +9,13 @@ type HealthHandlerInterface interface {
 	Health(ctx *gin.Context)
 }
 
-type HealthHandler struct {
+type healthHandler struct {
 }
 
-func (handler *HealthHandler) Health(ctx *gin.Context) {
+func (handler *healthHandler) Health(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
 func NewHealthHandler() HealthHandlerInterface {
-	return &HealthHandler{}
+	return &healthHandler{}
 }
