@@ -7,12 +7,20 @@ type SendMailServiceInterface interface {
 }
 
 type sendMailService struct {
+	vendors []SendMailServiceInterface
 }
 
 func (service *sendMailService) Send(contents mail.MailContents) error {
-	return nil
+	var err error
+	for _, vendor := range service.vendors {
+		err = vendor.Send(contents)
+		if err == nil {
+			break
+		}
+	}
+	return err
 }
 
-func NewSendMailService() SendMailServiceInterface {
-	return &sendMailService{}
+func NewSendMailService(vendors ...SendMailServiceInterface) SendMailServiceInterface {
+	return &sendMailService{vendors: vendors}
 }
