@@ -7,6 +7,8 @@ import (
 
 type Config struct {
 	Mail struct {
+		Charset string `env:"MAIL_CHARSET" envDefault:"UTF-8"`
+
 		SES struct {
 			AwsAccessKeyID string `env:"AWS_ACCESS_KEY_ID"`
 			AwsSecretKEY   string `env:"AWS_SECRET_KEY"`
