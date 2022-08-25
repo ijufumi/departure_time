@@ -7,5 +7,6 @@ type MailVendorInterface interface {
 type MailContents struct {
 	ToAddress   string
 	FromAddress string
-	Contents    string
+	Subject     string
+	Body        string
 }
