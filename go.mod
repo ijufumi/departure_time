@@ -1,4 +1,4 @@
-module github.com/ijufumi/departure_time
+module github.com/ijufumi/email-service
 
 go 1.19
 

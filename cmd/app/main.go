@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ijufumi/departure_time/internal/app/http/handler"
+	"github.com/ijufumi/email-service/internal/app/http/handler"
 )
 
 func main() {
