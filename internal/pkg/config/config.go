@@ -5,7 +5,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
-type config struct {
+type Config struct {
 	Mail struct {
 		SES struct {
 			AwsAccessKeyID string `env:"AWS_ACCESS_KEY_ID"`
@@ -19,9 +19,9 @@ type config struct {
 	}
 }
 
-func Load() *config {
+func Load() *Config {
 	_ = godotenv.Load()
-	c := config{}
+	c := Config{}
 	_ = env.Parse(&c)
 
 	return &c
