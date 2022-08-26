@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type HealthHandlerInterface interface {
+type HealthHandler interface {
 	Health(ctx *gin.Context)
 }
 
@@ -16,6 +16,6 @@ func (handler *healthHandler) Health(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
-func NewHealthHandler() HealthHandlerInterface {
+func NewHealthHandler() HealthHandler {
 	return &healthHandler{}
 }

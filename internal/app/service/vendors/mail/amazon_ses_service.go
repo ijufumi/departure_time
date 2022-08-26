@@ -7,11 +7,15 @@ import (
 	"github.com/ijufumi/email-service/internal/pkg/config"
 )
 
+type AmazonSESService interface {
+	SendMailVendor
+}
+
 type amazonSESService struct {
 	config *config.Config
 }
 
-func (service *amazonSESService) Send(contents MailContents) error {
+func (service *amazonSESService) Send(contents Contents) error {
 	svc, err := service.createSesService()
 	if err != nil {
 		return err
@@ -53,6 +57,6 @@ func (service *amazonSESService) createSesService() (*ses.SES, error) {
 	return ses.New(sesSession), nil
 }
 
-func NewAmazonSESService(config *config.Config) MailVendorInterface {
+func NewAmazonSESService(config *config.Config) AmazonSESService {
 	return &amazonSESService{config: config}
 }

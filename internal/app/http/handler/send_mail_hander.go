@@ -5,7 +5,7 @@ import (
 	"net/http"
 )
 
-type SendMailHandlerInterface interface {
+type SendMailHandler interface {
 	Send(ctx *gin.Context)
 }
 
@@ -16,6 +16,6 @@ func (handler *sendMailHandler) Send(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
-func NewSendMailHandler() SendMailHandlerInterface {
+func NewSendMailHandler() SendMailHandler {
 	return &sendMailHandler{}
 }

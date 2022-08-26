@@ -2,15 +2,15 @@ package service
 
 import "github.com/ijufumi/email-service/internal/app/service/vendors/mail"
 
-type SendMailServiceInterface interface {
-	Send(contents mail.MailContents) error
+type SendMailService interface {
+	Send(contents mail.Contents) error
 }
 
 type sendMailService struct {
-	vendors []SendMailServiceInterface
+	vendors []SendMailService
 }
 
-func (service *sendMailService) Send(contents mail.MailContents) error {
+func (service *sendMailService) Send(contents mail.Contents) error {
 	var err error
 	for _, vendor := range service.vendors {
 		err = vendor.Send(contents)
@@ -21,6 +21,6 @@ func (service *sendMailService) Send(contents mail.MailContents) error {
 	return err
 }
 
-func NewSendMailService(vendors ...SendMailServiceInterface) SendMailServiceInterface {
+func NewSendMailService(vendors ...SendMailService) SendMailService {
 	return &sendMailService{vendors: vendors}
 }

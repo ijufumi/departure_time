@@ -6,11 +6,15 @@ import (
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
+type SendGridService interface {
+	SendMailVendor
+}
+
 type sendGridService struct {
 	config *config.Config
 }
 
-func (service *sendGridService) Send(contents MailContents) error {
+func (service *sendGridService) Send(contents Contents) error {
 	toAddress := mail.NewEmail(contents.ToAddress, contents.ToAddress)
 	fromAddress := mail.NewEmail(contents.FromAddress, contents.FromAddress)
 	message := mail.NewSingleEmailPlainText(fromAddress, contents.Subject, toAddress, contents.Body)
@@ -23,7 +27,7 @@ func (service *sendGridService) createClient() *sendgrid.Client {
 	return sendgrid.NewSendClient(service.config.Mail.SendGrid.SendGridAPIKEY)
 }
 
-func NewSendGridService(config *config.Config) MailVendorInterface {
+func NewSendGridService(config *config.Config) SendGridService {
 	return &sendGridService{
 		config: config,
 	}

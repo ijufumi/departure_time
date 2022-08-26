@@ -1,10 +1,10 @@
 package mail
 
-type MailVendorInterface interface {
-	Send(contents MailContents) error
+type SendMailVendor interface {
+	Send(contents Contents) error
 }
 
-type MailContents struct {
+type Contents struct {
 	ToAddress   string
 	FromAddress string
 	Subject     string
