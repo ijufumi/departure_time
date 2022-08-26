@@ -7,6 +7,7 @@ import (
 	"github.com/ijufumi/email-service/internal/pkg/config"
 )
 
+// AmazonSESService is mail service for Amazon SES
 type AmazonSESService interface {
 	SendMailVendor
 }
@@ -15,6 +16,7 @@ type amazonSESService struct {
 	config *config.Config
 }
 
+// Send allows sending mail via SES
 func (service *amazonSESService) Send(contents Contents) error {
 	svc, err := service.createSesService()
 	if err != nil {
@@ -57,6 +59,7 @@ func (service *amazonSESService) createSesService() (*ses.SES, error) {
 	return ses.New(sesSession), nil
 }
 
+// NewAmazonSESService is factory method of AmazonSESService
 func NewAmazonSESService(config *config.Config) AmazonSESService {
 	return &amazonSESService{config: config}
 }
