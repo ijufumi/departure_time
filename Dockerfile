@@ -1,11 +1,12 @@
-FROM golang:1.19-bullseys as build
+FROM golang:1.19-bullseye as build
 
 WORKDIR /app
 
-COPY . ./
+COPY . .
+
 RUN go mod download
 
-RUN go build -o cmd/app/main.go
+RUN go build -o main /app/cmd/app/
 
 FROM debian:bullseye-slim as deploy
 
@@ -14,7 +15,5 @@ WORKDIR /app
 COPY --from=build /app/main /app/main
 
 EXPOSE 8080
-
-USER nonroot:nonroot
 
 ENTRYPOINT ["/app/main"]
