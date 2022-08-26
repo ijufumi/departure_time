@@ -21,6 +21,6 @@ func (service *sendMailService) Send(contents mail.Contents) error {
 	return err
 }
 
-func NewSendMailService(vendors ...SendMailService) SendMailService {
-	return &sendMailService{vendors: vendors}
+func NewSendMailService(amazonSESService mail.AmazonSESService, sendGridService mail.SendGridService) SendMailService {
+	return &sendMailService{vendors: []SendMailService{amazonSESService, sendGridService}}
 }
