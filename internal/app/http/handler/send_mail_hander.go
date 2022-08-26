@@ -2,8 +2,8 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/ijufumi/email-service/internal/app/http/request"
 	"github.com/ijufumi/email-service/internal/app/service"
-	"github.com/ijufumi/email-service/internal/app/service/vendors/mail"
 	"net/http"
 )
 
@@ -18,7 +18,7 @@ type sendMailHandler struct {
 
 // Send allows sending email via Email Vendors
 func (handler *sendMailHandler) Send(ctx *gin.Context) {
-	var contents mail.Contents
+	var contents request.SendMail
 	if err := ctx.BindJSON(&contents); err != nil {
 		_ = ctx.AbortWithError(http.StatusBadRequest, err)
 		return

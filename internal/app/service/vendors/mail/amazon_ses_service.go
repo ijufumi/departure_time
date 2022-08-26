@@ -4,6 +4,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/ses"
+	"github.com/ijufumi/email-service/internal/app/http/request"
 	"github.com/ijufumi/email-service/internal/pkg/config"
 )
 
@@ -17,7 +18,7 @@ type amazonSESService struct {
 }
 
 // Send allows sending mail via SES
-func (service *amazonSESService) Send(contents Contents) error {
+func (service *amazonSESService) Send(contents request.SendMail) error {
 	svc, err := service.createSesService()
 	if err != nil {
 		return err

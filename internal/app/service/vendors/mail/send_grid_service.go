@@ -1,6 +1,7 @@
 package mail
 
 import (
+	"github.com/ijufumi/email-service/internal/app/http/request"
 	"github.com/ijufumi/email-service/internal/pkg/config"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -16,7 +17,7 @@ type sendGridService struct {
 }
 
 // Send allows sending mail via SendGrid
-func (service *sendGridService) Send(contents Contents) error {
+func (service *sendGridService) Send(contents request.SendMail) error {
 	toAddress := mail.NewEmail(contents.ToAddress, contents.ToAddress)
 	fromAddress := mail.NewEmail(contents.FromAddress, contents.FromAddress)
 	message := mail.NewSingleEmailPlainText(fromAddress, contents.Subject, toAddress, contents.Body)
