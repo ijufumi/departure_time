@@ -7,8 +7,6 @@ import (
 
 func main() {
 	router := gin.Default()
-	router.Use(gin.Logger())
-	router.Use(gin.Recovery())
 
 	c := container.NewContainer()
 
