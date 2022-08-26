@@ -1,5 +1,6 @@
 package request
 
+// SendMail is request parameter for send mail
 type SendMail struct {
 	ToAddress   string `json:"to_address"`
 	FromAddress string `json:"from_address"`

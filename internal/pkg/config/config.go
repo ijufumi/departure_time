@@ -5,6 +5,7 @@ import (
 	"github.com/joho/godotenv"
 )
 
+// Config is application configuration
 type Config struct {
 	Mail struct {
 		Charset string `env:"MAIL_CHARSET" envDefault:"UTF-8"`
@@ -21,6 +22,7 @@ type Config struct {
 	}
 }
 
+// Load returns configuration made from environment variables
 func Load() *Config {
 	_ = godotenv.Load()
 	c := Config{}

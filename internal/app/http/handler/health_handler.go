@@ -5,6 +5,7 @@ import (
 	"net/http"
 )
 
+// HealthHandler is the handler for health check from load balancer
 type HealthHandler interface {
 	Health(ctx *gin.Context)
 }
@@ -12,10 +13,12 @@ type HealthHandler interface {
 type healthHandler struct {
 }
 
+// Health returns always 200
 func (handler *healthHandler) Health(ctx *gin.Context) {
 	ctx.Status(http.StatusOK)
 }
 
+// NewHealthHandler is factory method of HealthHandler
 func NewHealthHandler() HealthHandler {
 	return &healthHandler{}
 }
