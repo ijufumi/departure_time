@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/ijufumi/email-service/internal/app/http/handler"
+	"github.com/ijufumi/email-service/internal/app/container"
 )
 
 func main() {
@@ -10,13 +10,12 @@ func main() {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
+	c := container.NewContainer()
+
 	api := router.Group("/api/v1")
 	{
-		healthHandler := handler.NewHealthHandler()
-		api.GET("/health", healthHandler.Health)
-
-		sendMailHandler := handler.NewSendMailHandler()
-		api.POST("/send", sendMailHandler.Send)
+		api.GET("/health", c.GetHealthHandler().Health)
+		api.POST("/send", c.GetSendMailHandler().Send)
 	}
 	_ = router.Run(":8080")
 }
