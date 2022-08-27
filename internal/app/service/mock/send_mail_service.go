@@ -10,7 +10,8 @@ type mockSendMailService struct {
 	hasError bool
 }
 
-func (mock *mockSendMailService) Send(contents request.SendMail) error {
+// Send is mock of Send method
+func (mock *mockSendMailService) Send(_ request.SendMail) error {
 	if mock.hasError {
 		return errors.New("mock service error")
 	}
