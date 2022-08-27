@@ -7,11 +7,11 @@ import (
 )
 
 type mockSendMailService struct {
-	withError bool
+	hasError bool
 }
 
 func (mock *mockSendMailService) Send(contents request.SendMail) error {
-	if mock.withError {
+	if mock.hasError {
 		return errors.New("mock service error")
 	}
 	return nil
@@ -19,5 +19,5 @@ func (mock *mockSendMailService) Send(contents request.SendMail) error {
 
 // NewMockSendMailService is factory method of Mock of SendMailService
 func NewMockSendMailService(withError bool) service.SendMailService {
-	return &mockSendMailService{withError: withError}
+	return &mockSendMailService{hasError: withError}
 }
