@@ -13,7 +13,7 @@ func main() {
 	api := router.Group("/api/v1")
 	{
 		api.GET("/health", c.GetHealthHandler().Health)
-		api.POST("/send", c.GetSendMailHandler().Send)
+		api.POST("/mail/send", c.GetSendMailHandler().Send)
 	}
 	_ = router.Run(":8080")
 }
