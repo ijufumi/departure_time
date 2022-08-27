@@ -8,6 +8,7 @@ import (
 	"go.uber.org/dig"
 )
 
+// Container is DI container
 type Container interface {
 	GetHealthHandler() handler.HealthHandler
 	GetSendMailHandler() handler.SendMailHandler
@@ -31,6 +32,7 @@ func (c *container) provide() {
 	_ = c.container.Provide(handler.NewSendMailHandler)
 }
 
+// GetHealthHandler returns instance of HealthHandler
 func (c *container) GetHealthHandler() handler.HealthHandler {
 	var healthHandler handler.HealthHandler
 	_ = c.container.Invoke(func(_healthHandler handler.HealthHandler) {
@@ -39,6 +41,7 @@ func (c *container) GetHealthHandler() handler.HealthHandler {
 	return healthHandler
 }
 
+// GetSendMailHandler returns instance of SendMailHandler
 func (c *container) GetSendMailHandler() handler.SendMailHandler {
 	var sendMailHandler handler.SendMailHandler
 	_ = c.container.Invoke(func(_sendMailHandler handler.SendMailHandler) {
@@ -47,6 +50,7 @@ func (c *container) GetSendMailHandler() handler.SendMailHandler {
 	return sendMailHandler
 }
 
+// NewContainer creates instance of Container
 func NewContainer() Container {
 	c := container{container: dig.New()}
 	c.provide()
