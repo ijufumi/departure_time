@@ -24,7 +24,7 @@ func (handler *sendMailHandler) Send(ctx *gin.Context) {
 		return
 	}
 	if err := handler.sendMailService.Send(contents); err != nil {
-		_ = ctx.AbortWithError(http.StatusBadRequest, err)
+		_ = ctx.AbortWithError(http.StatusInternalServerError, err)
 		return
 	}
 	ctx.Status(http.StatusOK)
