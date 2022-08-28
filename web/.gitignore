@@ -1,0 +1,8 @@
+# for React
+node_modules
+dist/
+yarn-error.log
+
+# for IDEA
+.idea/
+
