@@ -1,5 +1,6 @@
 import React, { FC, useState } from "react";
 import { Stack, Box, Container, Typography, Grid, Input, Button } from "@mui/material";
+import UsecaseFactory from "../usecases/UsecaseFactory";
 
 interface Props { }
 
@@ -8,6 +9,12 @@ const Top: FC<Props> = () => {
   const [fromAddress, setFromAddress] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [body, setBody] = useState<string>("");
+
+  const sendMail = UsecaseFactory.createSendMail();
+
+  const handleSendButton = async () => {
+    await sendMail.send({toAddress, fromAddress, subject, body});
+  };
 
   return (
     <Container sx={{ bgcolor: "#f5f5f5", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", minWidth: "100vw"}}>
@@ -44,7 +51,7 @@ const Top: FC<Props> = () => {
               </Grid>
               <Grid item xs={12}>
                 <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                  <Button variant="outlined" color="success">
+                  <Button variant="outlined" color="success" onClick={handleSendButton}>
                     <Typography variant="button">Send</Typography>
                   </Button>
                 </Box>

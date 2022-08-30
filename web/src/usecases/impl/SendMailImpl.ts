@@ -8,7 +8,7 @@ class SendMailImple implements SendMail {
     this.sendMailRepositry = RepositoryFactory.createSendMailRepository();
   }
 
-  async sendMail(args: { toAddress: string; fromAddress: string; subject: string; body: string; }): Promise<any> {
+  async send(args: { toAddress: string; fromAddress: string; subject: string; body: string; }): Promise<any> {
     return await this.sendMailRepositry.send(args);
   }
 }
