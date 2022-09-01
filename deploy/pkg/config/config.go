@@ -19,6 +19,9 @@ type Config struct {
 	Repository struct {
 		Name string `env:"REPOSITORY_NAME"`
 	}
+	Cluster struct {
+		Name string `env:"CLUSTER_NAME"`
+	}
 }
 
 // Load returns configuration made from environment variables
