@@ -43,7 +43,7 @@ func main() {
 }
 
 func env() *awscdk.Environment {
-	var configuration = config.Load()
+	configuration := config.Load()
 	var account = configuration.AwsAccessKeyID
 	if len(account) == 0 {
 		account = configuration.CdkDefaultAccount
