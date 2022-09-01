@@ -5,6 +5,7 @@ import (
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
 	"github.com/ijufumi/email-service/deploy/pkg/config"
+	"github.com/ijufumi/email-service/deploy/pkg/stacks"
 )
 
 type DeployStackProps struct {
@@ -12,18 +13,14 @@ type DeployStackProps struct {
 }
 
 func NewDeployStack(scope constructs.Construct, id string, props *DeployStackProps) awscdk.Stack {
-	var staskProps awscdk.StackProps
+	var stackProps awscdk.StackProps
 	if props != nil {
-		staskProps = props.StackProps
+		stackProps = props.StackProps
 	}
-	stack := awscdk.NewStack(scope, &id, &staskProps)
+	stack := awscdk.NewStack(scope, &id, &stackProps)
 
-	// The code that defines your stack goes here
-
-	// example resource
-	// queue := awssqs.NewQueue(stack, jsii.String("DeployQueue"), &awssqs.QueueProps{
-	// 	VisibilityTimeout: awscdk.Duration_Seconds(jsii.Number(300)),
-	// })
+	stacks.CreateVPC(stack)
+	stacks.CreateECR(stack)
 
 	return stack
 }

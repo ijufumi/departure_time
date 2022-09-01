@@ -12,8 +12,11 @@ type Config struct {
 	CdkDefaultAccount string `env:"CDK_DEFAULT_ACCOUNT"`
 	CdkDefaultRegion  string `env:"CDK_DEFAULT_REGION"`
 
+	Vpc struct {
+		Name      string `env:"VPC_NAME"`
+		CidrBlock string `env:"CIDR_BLOCK"`
+	}
 	Repository struct {
-		ID   string `env:"REPOSITORY_ID" envDefault:"repository-id"`
 		Name string `env:"REPOSITORY_NAME"`
 	}
 }

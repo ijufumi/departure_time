@@ -1,6 +1,7 @@
 package stacks
 
 import (
+	"fmt"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecr"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
@@ -8,10 +9,11 @@ import (
 )
 
 func CreateECR(scope constructs.Construct) {
-	var configuration = config.Load()
-	var props = awsecr.RepositoryProps{
+	configuration := config.Load()
+	props := awsecr.RepositoryProps{
 		RepositoryName: jsii.String(configuration.Repository.Name),
 	}
 
-	awsecr.NewRepository(scope, jsii.String(configuration.Repository.ID), &props)
+	repositoryID := fmt.Sprintf("id-%s", configuration.Repository.Name)
+	awsecr.NewRepository(scope, jsii.String(repositoryID), &props)
 }
