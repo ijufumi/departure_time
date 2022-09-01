@@ -11,6 +11,11 @@ type Config struct {
 	AwsRegion         string `env:"AWS_REGION"`
 	CdkDefaultAccount string `env:"CDK_DEFAULT_ACCOUNT"`
 	CdkDefaultRegion  string `env:"CDK_DEFAULT_REGION"`
+
+	Repository struct {
+		ID   string `env:"REPOSITORY_ID" envDefault:"repository-id"`
+		Name string `env:"REPOSITORY_NAME"`
+	}
 }
 
 // Load returns configuration made from environment variables
