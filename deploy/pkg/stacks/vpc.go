@@ -2,6 +2,7 @@ package stacks
 
 import (
 	"fmt"
+
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsec2"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
@@ -21,8 +22,7 @@ func CreateVPC(scope constructs.Construct) awsec2.Vpc {
 			SubnetType: awsec2.SubnetType_PRIVATE_WITH_NAT,
 		},
 		{
-			Name: jsii.String(fmt.Sprintf("private2-subnet-%s", configuration.Vpc.Name)),
-
+			Name:       jsii.String(fmt.Sprintf("private2-subnet-%s", configuration.Vpc.Name)),
 			SubnetType: awsec2.SubnetType_PRIVATE_ISOLATED,
 		},
 	}
