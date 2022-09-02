@@ -22,6 +22,10 @@ type Config struct {
 	Cluster struct {
 		Name string `env:"CLUSTER_NAME"`
 	}
+	LoadBalancer struct {
+		Name           string `env:"LOAD_BALANCER_NAME"`
+		CertificateArn string `env:"LOAD_BALANCER_CERTIFICATE_ARN"`
+	}
 }
 
 // Load returns configuration made from environment variables
