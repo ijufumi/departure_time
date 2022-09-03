@@ -11,7 +11,7 @@ func main() {
 
 	c := container.NewContainer()
 
-	c.Use(static.Serve("/", static.LocalFile("./web/public", true)))
+	router.Use(static.Serve("/", static.LocalFile("./web/public", true)))
 
 	api := router.Group("/api/v1")
 	{
