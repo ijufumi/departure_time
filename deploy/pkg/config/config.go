@@ -26,6 +26,9 @@ type Config struct {
 		DomainName     string `env:"LOAD_BALANCER_DOMAIN_NAME"`
 		CertificateArn string `env:"LOAD_BALANCER_CERTIFICATE_ARN"`
 	}
+	Route53 struct {
+		ZoneID string `env:"ROUTE53_ZONE_ID"`
+	}
 }
 
 // Load returns configuration made from environment variables

@@ -13,7 +13,7 @@ import (
 	"github.com/ijufumi/email-service/deploy/pkg/config"
 )
 
-func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
+func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) awsecspatterns.ApplicationLoadBalancedFargateService {
 	configuration := config.Load()
 	clusterID := fmt.Sprintf("id-%s", configuration.Cluster.Name)
 	clusterProps := awsecs.ClusterProps{
@@ -46,6 +46,5 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 		},
 	}
 	ecsServiceID := fmt.Sprintf("ecs-service-%s", configuration.Cluster.Name)
-	awsecspatterns.NewApplicationLoadBalancedFargateService(scope, jsii.String(ecsServiceID), &ecsServiceProps)
-
+	return awsecspatterns.NewApplicationLoadBalancedFargateService(scope, jsii.String(ecsServiceID), &ecsServiceProps)
 }
