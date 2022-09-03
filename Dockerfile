@@ -8,11 +8,19 @@ RUN go mod download
 
 RUN go build -o main /app/cmd/app/
 
+WORKDIR /app/web
+
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
+RUN apt-get update && apt-get install -y yarn nodejs npm && npm install npx -g && yarn build
+
 FROM debian:bullseye-slim as deploy
 
 WORKDIR /app
 
 COPY --from=build /app/main /app/main
+
+COPY --from=build /app/web /app/web
 
 EXPOSE 8080
 
