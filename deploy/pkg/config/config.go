@@ -23,7 +23,7 @@ type Config struct {
 		Name string `env:"CLUSTER_NAME"`
 	}
 	LoadBalancer struct {
-		Name           string `env:"LOAD_BALANCER_NAME"`
+		DomainName     string `env:"LOAD_BALANCER_DOMAIN_NAME"`
 		CertificateArn string `env:"LOAD_BALANCER_CERTIFICATE_ARN"`
 	}
 }

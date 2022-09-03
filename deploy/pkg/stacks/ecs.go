@@ -35,7 +35,7 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 		RedirectHTTP:       jsii.Bool(true),
 		PublicLoadBalancer: jsii.Bool(true),
 		Protocol:           awselasticloadbalancingv2.ApplicationProtocol_HTTPS,
-		DomainName:         jsii.String(configuration.LoadBalancer.Name),
+		DomainName:         jsii.String(configuration.LoadBalancer.DomainName),
 		Certificate:        certificate,
 		TaskSubnets: &awsec2.SubnetSelection{
 			Subnets: vpc.PrivateSubnets(),
