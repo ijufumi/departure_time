@@ -16,11 +16,12 @@ type Config struct {
 		Name      string `env:"VPC_NAME"`
 		CidrBlock string `env:"CIDR_BLOCK"`
 	}
-	Repository struct {
-		Name string `env:"REPOSITORY_NAME"`
-	}
 	Cluster struct {
-		Name string `env:"CLUSTER_NAME"`
+		Name  string `env:"CLUSTER_NAME"`
+		Image struct {
+			RepositoryName string `env:"CLUSTER_IMAGE_REPOSITORY_NAME"`
+			Tag            string `env:"CLUSTER_IMAGE_TAG"`
+		}
 	}
 	LoadBalancer struct {
 		DomainName     string `env:"LOAD_BALANCER_DOMAIN_NAME"`
