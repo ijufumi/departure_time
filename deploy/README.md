@@ -5,7 +5,7 @@
 * awscli
 * docker
 
-## Setup
+## Setup CDK
 
 ### Enable AWS account
 If your profile is not `default`, you should execute the below command.
@@ -38,18 +38,19 @@ and push
 docker build -t [your repository uri]:[tag] .
 ```
 
+### Initialize CDK
 
 ```bash
 cdk bootstrap
 ```
 
-## Confirm
+## Confirm CDK
 
 ```bash
 cdk diff
 ```
 
-## Execute
+## Execute CDK
 
 ```bash
 cdk deploy
