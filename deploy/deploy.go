@@ -20,8 +20,7 @@ func NewDeployStack(scope constructs.Construct, id string, props *DeployStackPro
 	stack := awscdk.NewStack(scope, &id, &stackProps)
 
 	vpc := stacks.CreateVPC(stack)
-	ecsService := stacks.CreateECS(stack, vpc)
-	stacks.CreateRoute53(stack, ecsService)
+	stacks.CreateECS(stack, vpc)
 
 	return stack
 }
