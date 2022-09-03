@@ -1,5 +1,11 @@
 # Deployment 
 
+Create AWS environment using AWS CDK.
+
+## Overall
+
+![Overall](./docs/overall.png)
+
 ## Requirements
 
 * awscli
