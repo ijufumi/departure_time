@@ -10,6 +10,7 @@ Basically, the package structure follows the [Standard Go Project Layout](https:
 .
 ├── api                     # API Specification
 ├── cmd                     # Entrypoint of launching app
+├── deploy                  # The code to create environment
 ├── internal                # Code for internal use
 │   ├── app                 # Code for app specific
 │   │   ├── container       # Create DI container
@@ -28,16 +29,14 @@ Basically, the package structure follows the [Standard Go Project Layout](https:
 ```
 
 ## How to run app
-
-### for local
-
-#### Prepare services
-
+### Common
+#### Prepare mail services
 * Amazon SES
   * [Amazon Simple Email Service を設定する](https://docs.aws.amazon.com/ja_jp/ses/latest/dg/setting-up.html)
 * SendGrid
   * [SMTPメールの構築](https://sendgrid.kke.co.jp/docs/API_Reference/SMTP_API/building_an_smtp_email.html)
 
+### for local
 #### Prepare `.env` file
 
 Copy `.env.example` to `.env` and edit it.
@@ -54,6 +53,11 @@ Should input these values
 ```bash
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILCDKIT=1 docker-compose up --build
 ```
+
+### for AWS
+#### Create environment
+See [deploy](./deploy)
+
 
 ## How to execute test
 
