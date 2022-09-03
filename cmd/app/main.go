@@ -11,11 +11,12 @@ func main() {
 
 	c := container.NewContainer()
 
+	c.Use(static.Serve("/", static.LocalFile("./web/public", true)))
+
 	api := router.Group("/api/v1")
 	{
 		api.GET("/health", c.GetHealthHandler().Health)
 		api.POST("/mail/send", c.GetSendMailHandler().Send)
 	}
-	api.Use(static.Serve("/", static.LocalFile("./web/public", true)))
 	_ = router.Run(":8080")
 }
