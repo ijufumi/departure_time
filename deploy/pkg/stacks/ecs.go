@@ -77,9 +77,8 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 			Image:         image,
 			ContainerPort: jsii.Number(8080),
 			Environment: &map[string]*string{
-				"GIN_MODE":         &configuration.App.GinMode,
-				"AWS_SES_ENDPOINT": &configuration.App.Aws.AwsSesEndpoint,
-				"AWS_REGION":       &configuration.App.Aws.AwsRegion,
+				"GIN_MODE":   &configuration.App.GinMode,
+				"AWS_REGION": &configuration.App.Aws.AwsRegion,
 			},
 			Secrets: &map[string]awsecs.Secret{
 				"AWS_ACCESS_KEY_ID": awsecs.Secret_FromSsmParameter(awsAccessKey),
