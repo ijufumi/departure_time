@@ -11,7 +11,13 @@ Create AWS environment using AWS CDK.
 * awscli
 * docker
 
-## Setup CDK
+## Preparation
+
+### Precondition
+
+* Have a AWS Account
+* Have a own domain name
+* Already created a certification of ACM
 
 ### Enable AWS account
 If your profile is not `default`, you should execute the below command.
@@ -44,7 +50,23 @@ and push
 docker build -t [your repository uri]:[tag] .
 ```
 
-### Initialize CDK
+### Create `.env`
+
+Crete `.env` file by copying from `.env.example`.
+And then, fill out the below items.
+
+| Item | Description |
+| ---- | ---- |
+| `CIDR_BLOCK` | A CIDR block of a new VPC |
+| `VPC_NAME` | A name of a new VPC |
+| `CLUSTER_NAME` | a name of a new ECS cluster |
+| `CLUSTER_IMAGE_REPOSITORY_NAME` | The ECR repository name used by ECS |
+| `CLUSTER_IMAGE_TAG` | A image tag of image used by ECS |
+| `LOAD_BALANCER_DOMAIN_NAME` | The load balancer name to connect |
+| `LOAD_BALANCER_CERTIFICATE_ARN` | The ARN of certification used by ALB |
+| `ROUTE53_DOMAIN_NAME` | The hostzoned name |
+
+## Initialize CDK
 
 ```bash
 cdk bootstrap
