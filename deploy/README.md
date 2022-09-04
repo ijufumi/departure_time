@@ -16,8 +16,10 @@ Create AWS environment using AWS CDK.
 ### Precondition
 
 * Have a AWS Account
+  * Create a SES Identity
 * Have a own domain name
 * Already created a certification of ACM
+* Create a SendGrid's account
 
 ### Enable AWS account
 If your profile is not `default`, you should execute the below command.
