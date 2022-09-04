@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecs"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecspatterns"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awselasticloadbalancingv2"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsiam"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsroute53"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsssm"
 	"github.com/aws/constructs-go/constructs/v10"
@@ -46,6 +47,19 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 		Type:          awsssm.ParameterType_SECURE_STRING,
 	})
 
+	ecsTaskRole := awsiam.NewRole(scope, jsii.String("ecs-task-role"), &awsiam.RoleProps{
+		AssumedBy: awsiam.NewServicePrincipal(jsii.String("ecs-tasks.amazonaws.com"), &awsiam.ServicePrincipalOpts{}),
+		InlinePolicies: &map[string]awsiam.PolicyDocument{
+			"inlinePolicy1": awsiam.NewPolicyDocument(&awsiam.PolicyDocumentProps{
+				Statements: &[]awsiam.PolicyStatement{
+					awsiam.NewPolicyStatement(&awsiam.PolicyStatementProps{
+						Actions:   jsii.Strings("ssm:Get*", "ssm:Describe*", "ssm:List*"),
+						Resources: jsii.Strings("arn:aws:ssm:*:%*:parameter/*"),
+					}),
+				},
+			}),
+		},
+	})
 	ecsServiceProps := awsecspatterns.ApplicationLoadBalancedFargateServiceProps{
 		Cluster:            ecsCluster,
 		DesiredCount:       jsii.Number(1),
@@ -72,6 +86,7 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 				"AWS_SECRET_KEY":    awsecs.Secret_FromSsmParameter(awsSecretKey),
 				"SENDGRID_API_KEY":  awsecs.Secret_FromSsmParameter(sendGridKey),
 			},
+			TaskRole: ecsTaskRole,
 		},
 	}
 	ecsServiceID := fmt.Sprintf("ecs-service-%s", configuration.Cluster.Name)
