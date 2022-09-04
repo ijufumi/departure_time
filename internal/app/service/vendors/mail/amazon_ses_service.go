@@ -1,9 +1,11 @@
 package mail
 
 import (
-	"github.com/aws/aws-sdk-go/aws"
-	"github.com/aws/aws-sdk-go/aws/session"
-	"github.com/aws/aws-sdk-go/service/ses"
+	"context"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	awsConfig "github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2"
+	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/ijufumi/email-service/internal/app/http/request"
 	"github.com/ijufumi/email-service/internal/pkg/config"
 )
@@ -24,40 +26,40 @@ func (service *amazonSESService) Send(contents request.SendMail) error {
 		return err
 	}
 
-	input := ses.SendEmailInput{
-		Destination: &ses.Destination{
-			ToAddresses: []*string{
-				aws.String(contents.ToAddress),
+	input := sesv2.SendEmailInput{
+		Destination: &types.Destination{
+			ToAddresses: []string{
+				contents.ToAddress,
 			},
-			CcAddresses: []*string{},
+			CcAddresses: []string{},
 		},
-		Message: &ses.Message{
-			Body: &ses.Body{
-				Text: &ses.Content{
-					Data:    aws.String(contents.Body),
+		FromEmailAddress: aws.String(contents.FromAddress),
+		Content: &types.EmailContent{
+			Simple: &types.Message{
+				Body: &types.Body{
+					Text: &types.Content{
+						Data:    aws.String(contents.Body),
+						Charset: aws.String(service.config.Mail.Charset),
+					}},
+				Subject: &types.Content{
+					Data:    aws.String(contents.Subject),
 					Charset: aws.String(service.config.Mail.Charset),
 				},
-			},
-			Subject: &ses.Content{
-				Data:    aws.String(contents.Subject),
-				Charset: aws.String(service.config.Mail.Charset),
 			},
 		},
 	}
 
-	_, err = svc.SendEmail(&input)
+	_, err = svc.SendEmail(context.Background(), &input)
 	return err
 }
 
-func (service *amazonSESService) createSesService() (*ses.SES, error) {
-	sesSession, err := session.NewSession(&aws.Config{
-		Region: aws.String(service.config.Mail.SES.AwsRegion),
-	})
+func (service *amazonSESService) createSesService() (*sesv2.Client, error) {
+	awsConfiguration, err := awsConfig.LoadDefaultConfig(context.Background())
 	if err != nil {
 		return nil, err
 	}
 
-	return ses.New(sesSession), nil
+	return sesv2.NewFromConfig(awsConfiguration), nil
 }
 
 // NewAmazonSESService is factory method of AmazonSESService

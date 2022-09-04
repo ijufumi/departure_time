@@ -13,7 +13,6 @@ type Config struct {
 		SES struct {
 			AwsAccessKeyID string `env:"AWS_ACCESS_KEY_ID"`
 			AwsSecretKEY   string `env:"AWS_SECRET_KEY"`
-			AwsSesEndpoint string `env:"AWS_SES_ENDPOINT"`
 			AwsRegion      string `env:"AWS_REGION"`
 		}
 		SendGrid struct {
