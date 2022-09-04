@@ -38,7 +38,7 @@ aws ecr get-login-password --region [your region] | docker login --username AWS 
 aws ecr create-repository --repository-name [your repository name]
 ```
 
-### Build a image
+### Build a app image
 
 ```bash
 docker build -t [your repository uri]:[tag] .
@@ -55,6 +55,8 @@ docker build -t [your repository uri]:[tag] .
 Crete `.env` file by copying from `.env.example`.
 And then, fill out the below items.
 
+* deploy
+
 | Item | Description |
 | ---- | ---- |
 | `CIDR_BLOCK` | A CIDR block of a new VPC |
@@ -65,6 +67,18 @@ And then, fill out the below items.
 | `LOAD_BALANCER_DOMAIN_NAME` | The load balancer name to connect |
 | `LOAD_BALANCER_CERTIFICATE_ARN` | The ARN of certification used by ALB |
 | `ROUTE53_DOMAIN_NAME` | The hostzoned name |
+
+* application
+
+| Item | Description |
+| ---- | ---- |
+| `APP_GIN_MODE` | The mode of GIN |
+| `APP_AWS_ACCESS_KEY_ID` | A `AWS_ACCESS_KEY_ID` used by app |
+| `APP_AWS_SECRET_KEY` | A `AWS_SECRET_KEY` used by app |
+| `APP_AWS_SES_ENDPOINT` | A `AWS_SES_ENDPOINT` used by app |
+| `APP_AWS_REGION` | A `AWS_REGION` used by app |
+| `APP_SENDGRID_API_KEY` | A `SENDGRID_API_KEY` used by app |
+
 
 ## Initialize CDK
 

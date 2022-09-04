@@ -30,6 +30,20 @@ type Config struct {
 	Route53 struct {
 		DomainName string `env:"ROUTE53_DOMAIN_NAME"`
 	}
+
+	App struct {
+		GinMode string `env:"APP_GIN_MODE"`
+
+		Aws struct {
+			AwsAccessKeyID string `env:"APP_AWS_ACCESS_KEY_ID"`
+			AwsSecretKey   string `env:"APP_AWS_SECRET_KEY"`
+			AwsRegion      string `env:"APP_AWS_REGION"`
+			AwsSesEndpoint string `env:"APP_AWS_SES_ENDPOINT"`
+		}
+		SendGrid struct {
+			SendGridAPIKEY string `env:"APP_SENDGRID_API_KEY"`
+		}
+	}
 }
 
 // Load returns configuration made from environment variables
