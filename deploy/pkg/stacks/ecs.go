@@ -10,6 +10,7 @@ import (
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsecspatterns"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awselasticloadbalancingv2"
 	"github.com/aws/aws-cdk-go/awscdk/v2/awsroute53"
+	"github.com/aws/aws-cdk-go/awscdk/v2/awsssm"
 	"github.com/aws/constructs-go/constructs/v10"
 	"github.com/aws/jsii-runtime-go"
 	"github.com/ijufumi/email-service/deploy/pkg/config"
@@ -29,6 +30,22 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 	}
 	repository := awsecr.Repository_FromRepositoryName(scope, jsii.String("ecr-repository"), &configuration.Cluster.Image.RepositoryName)
 	image := awsecs.ContainerImage_FromEcrRepository(repository, &configuration.Cluster.Image.Tag)
+	awsAccessKey := awsssm.NewStringParameter(scope, jsii.String("aws-access-key"), &awsssm.StringParameterProps{
+		ParameterName: jsii.String("app-aws-access-key"),
+		StringValue:   &configuration.App.Aws.AwsAccessKeyID,
+		Type:          awsssm.ParameterType_SECURE_STRING,
+	})
+	awsSecretKey := awsssm.NewStringParameter(scope, jsii.String("aws-secret-key"), &awsssm.StringParameterProps{
+		ParameterName: jsii.String("app-aws-secret-key"),
+		StringValue:   &configuration.App.Aws.AwsSecretKey,
+		Type:          awsssm.ParameterType_SECURE_STRING,
+	})
+	sendGridKey := awsssm.NewStringParameter(scope, jsii.String("send-grid-key"), &awsssm.StringParameterProps{
+		ParameterName: jsii.String("app-send-grid-key"),
+		StringValue:   &configuration.App.SendGrid.SendGridAPIKEY,
+		Type:          awsssm.ParameterType_SECURE_STRING,
+	})
+
 	ecsServiceProps := awsecspatterns.ApplicationLoadBalancedFargateServiceProps{
 		Cluster:            ecsCluster,
 		DesiredCount:       jsii.Number(1),
@@ -45,6 +62,16 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 		TaskImageOptions: &awsecspatterns.ApplicationLoadBalancedTaskImageOptions{
 			Image:         image,
 			ContainerPort: jsii.Number(8080),
+			Environment: &map[string]*string{
+				"GIN_MODE":         &configuration.App.GinMode,
+				"AWS_SES_ENDPOINT": &configuration.App.Aws.AwsSesEndpoint,
+				"AWS_REGION":       &configuration.App.Aws.AwsRegion,
+			},
+			Secrets: &map[string]awsecs.Secret{
+				"AWS_ACCESS_KEY_ID": awsecs.Secret_FromSsmParameter(awsAccessKey),
+				"AWS_SECRET_KEY":    awsecs.Secret_FromSsmParameter(awsSecretKey),
+				"SENDGRID_API_KEY":  awsecs.Secret_FromSsmParameter(sendGridKey),
+			},
 		},
 	}
 	ecsServiceID := fmt.Sprintf("ecs-service-%s", configuration.Cluster.Name)
