@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Stack, Box, Container, Typography, Grid, Input, Button } from "@mui/material";
+import { Stack, Box, Container, Typography, Grid, Input, Button, Snackbar, Alert } from "@mui/material";
 import UsecaseFactory from "../usecases/UsecaseFactory";
 
 interface Props { }
@@ -9,16 +9,33 @@ const Top: FC<Props> = () => {
   const [fromAddress, setFromAddress] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [body, setBody] = useState<string>("");
+  const [successSnackBarOpen, setSuccessSnackBarOpen] = useState<boolean>(false);
+  const [errorSnackBarOpen, setErrorSnackBarOpen] = useState<boolean>(false);
 
   const sendMail = UsecaseFactory.createSendMail();
 
   const handleSendButton = async () => {
-    await sendMail.send({toAddress, fromAddress, subject, body});
+    const result = await sendMail.send({toAddress, fromAddress, subject, body});
+    if (result) {
+      setToAddress("");
+      setFromAddress("");
+      setSubject("");
+      setBody("");
+      setSuccessSnackBarOpen(true);
+    } else {
+      setErrorSnackBarOpen(true);
+    }
   };
 
   return (
     <Container sx={{ bgcolor: "#f5f5f5", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", minWidth: "100vw"}}>
       <Box sx={{ bgcolor: "#ffffff", borderRadius: "10px" }} width={"600px"} height={"550px"}>
+        <Snackbar open={successSnackBarOpen} onClick={() => setSuccessSnackBarOpen(false)}>
+          <Alert severity="success" variant="filled">Sending message was successful</Alert>
+        </Snackbar>
+        <Snackbar open={errorSnackBarOpen} onClick={() => setErrorSnackBarOpen(false)}>
+          <Alert severity="warning" variant="filled">Sending message was fault by something error</Alert>
+        </Snackbar>
         <Stack direction={"column"} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <Box my={2}>
             <Typography variant="h3">{"Send Email"}</Typography>
