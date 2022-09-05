@@ -34,17 +34,17 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 	awsAccessKey := awsssm.NewStringParameter(scope, jsii.String("aws-access-key"), &awsssm.StringParameterProps{
 		ParameterName: jsii.String("app-aws-access-key"),
 		StringValue:   &configuration.App.Aws.AwsAccessKeyID,
-		Type:          awsssm.ParameterType_SECURE_STRING,
+		Type:          awsssm.ParameterType_STRING,
 	})
 	awsSecretAccessKey := awsssm.NewStringParameter(scope, jsii.String("aws-secret-access-key"), &awsssm.StringParameterProps{
 		ParameterName: jsii.String("app-aws-secret-key"),
 		StringValue:   &configuration.App.Aws.AwsSecretAccessKey,
-		Type:          awsssm.ParameterType_SECURE_STRING,
+		Type:          awsssm.ParameterType_STRING,
 	})
 	sendGridKey := awsssm.NewStringParameter(scope, jsii.String("send-grid-key"), &awsssm.StringParameterProps{
 		ParameterName: jsii.String("app-send-grid-key"),
 		StringValue:   &configuration.App.SendGrid.SendGridAPIKEY,
-		Type:          awsssm.ParameterType_SECURE_STRING,
+		Type:          awsssm.ParameterType_STRING,
 	})
 
 	ecsTaskRole := awsiam.NewRole(scope, jsii.String("ecs-task-role"), &awsiam.RoleProps{
@@ -54,7 +54,7 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 				Statements: &[]awsiam.PolicyStatement{
 					awsiam.NewPolicyStatement(&awsiam.PolicyStatementProps{
 						Actions:   jsii.Strings("ssm:Get*", "ssm:Describe*", "ssm:List*"),
-						Resources: jsii.Strings("arn:aws:ssm:*:%*:parameter/*"),
+						Resources: jsii.Strings("arn:aws:ssm:*"),
 					}),
 				},
 			}),
