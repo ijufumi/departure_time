@@ -36,7 +36,7 @@ type Config struct {
 
 		Aws struct {
 			AwsAccessKeyID     string `env:"APP_AWS_ACCESS_KEY_ID"`
-			AwsSecretAccessKey string `env:"AWS_SECRET_ACCESS_KEY"`
+			AwsSecretAccessKey string `env:"APP_AWS_SECRET_ACCESS_KEY"`
 			AwsRegion          string `env:"APP_AWS_REGION"`
 		}
 		SendGrid struct {
