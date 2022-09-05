@@ -35,9 +35,9 @@ type Config struct {
 		GinMode string `env:"APP_GIN_MODE"`
 
 		Aws struct {
-			AwsAccessKeyID string `env:"APP_AWS_ACCESS_KEY_ID"`
-			AwsSecretKey   string `env:"APP_AWS_SECRET_KEY"`
-			AwsRegion      string `env:"APP_AWS_REGION"`
+			AwsAccessKeyID     string `env:"APP_AWS_ACCESS_KEY_ID"`
+			AwsSecretAccessKey string `env:"AWS_SECRET_ACCESS_KEY"`
+			AwsRegion          string `env:"APP_AWS_REGION"`
 		}
 		SendGrid struct {
 			SendGridAPIKEY string `env:"APP_SENDGRID_API_KEY"`

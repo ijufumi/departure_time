@@ -36,9 +36,9 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 		StringValue:   &configuration.App.Aws.AwsAccessKeyID,
 		Type:          awsssm.ParameterType_SECURE_STRING,
 	})
-	awsSecretKey := awsssm.NewStringParameter(scope, jsii.String("aws-secret-key"), &awsssm.StringParameterProps{
+	awsSecretAccessKey := awsssm.NewStringParameter(scope, jsii.String("aws-secret-access-key"), &awsssm.StringParameterProps{
 		ParameterName: jsii.String("app-aws-secret-key"),
-		StringValue:   &configuration.App.Aws.AwsSecretKey,
+		StringValue:   &configuration.App.Aws.AwsSecretAccessKey,
 		Type:          awsssm.ParameterType_SECURE_STRING,
 	})
 	sendGridKey := awsssm.NewStringParameter(scope, jsii.String("send-grid-key"), &awsssm.StringParameterProps{
@@ -81,9 +81,9 @@ func CreateECS(scope constructs.Construct, vpc awsec2.Vpc) {
 				"AWS_REGION": &configuration.App.Aws.AwsRegion,
 			},
 			Secrets: &map[string]awsecs.Secret{
-				"AWS_ACCESS_KEY_ID": awsecs.Secret_FromSsmParameter(awsAccessKey),
-				"AWS_SECRET_KEY":    awsecs.Secret_FromSsmParameter(awsSecretKey),
-				"SENDGRID_API_KEY":  awsecs.Secret_FromSsmParameter(sendGridKey),
+				"AWS_ACCESS_KEY_ID":     awsecs.Secret_FromSsmParameter(awsAccessKey),
+				"AWS_SECRET_ACCESS_KEY": awsecs.Secret_FromSsmParameter(awsSecretAccessKey),
+				"SENDGRID_API_KEY":      awsecs.Secret_FromSsmParameter(sendGridKey),
 			},
 			TaskRole: ecsTaskRole,
 		},
