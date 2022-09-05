@@ -11,9 +11,9 @@ type Config struct {
 		Charset string `env:"MAIL_CHARSET" envDefault:"UTF-8"`
 
 		SES struct {
-			AwsAccessKeyID string `env:"AWS_ACCESS_KEY_ID"`
-			AwsSecretKEY   string `env:"AWS_SECRET_KEY"`
-			AwsRegion      string `env:"AWS_REGION"`
+			AwsAccessKeyID     string `env:"AWS_ACCESS_KEY_ID"`
+			AwsSecretAccessKEY string `env:"AWS_SECRET_ACCESS_KEY"`
+			AwsRegion          string `env:"AWS_REGION"`
 		}
 		SendGrid struct {
 			SendGridAPIKEY string `env:"SENDGRID_API_KEY"`
