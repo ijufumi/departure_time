@@ -30,10 +30,10 @@ const Top: FC<Props> = () => {
   return (
     <Container sx={{ bgcolor: "#f5f5f5", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", minWidth: "100vw"}}>
       <Box sx={{ bgcolor: "#ffffff", borderRadius: "10px" }} width={"600px"} height={"550px"}>
-        <Snackbar open={successSnackBarOpen} onClick={() => setSuccessSnackBarOpen(false)}>
+        <Snackbar open={successSnackBarOpen} onClick={() => setSuccessSnackBarOpen(false)} autoHideDuration={1000}>
           <Alert severity="success" variant="filled">Sending message was successful</Alert>
         </Snackbar>
-        <Snackbar open={errorSnackBarOpen} onClick={() => setErrorSnackBarOpen(false)}>
+        <Snackbar open={errorSnackBarOpen} onClick={() => setErrorSnackBarOpen(false)} autoHideDuration={1000}>
           <Alert severity="warning" variant="filled">Sending message was fault by something error</Alert>
         </Snackbar>
         <Stack direction={"column"} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
