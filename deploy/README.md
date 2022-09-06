@@ -6,6 +6,13 @@ Create AWS environment using AWS CDK.
 
 ![Overall](./docs/overall.png)
 
+### Description
+
+* Use ALB
+* Use Fargate on ECS as a container runtime
+* Use ECR as a container registry
+* Use SSL certification with ACM
+
 ## Requirements
 
 * awscli
