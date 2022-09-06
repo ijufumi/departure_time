@@ -12,6 +12,8 @@ Create AWS environment using AWS CDK.
 * Use Fargate on ECS as a container runtime
 * Use ECR as a container registry
 * Use SSL certification with ACM
+* Use parameter store to store credentials
+* Use Route53 to set alias of ALB
 
 ## Requirements
 
