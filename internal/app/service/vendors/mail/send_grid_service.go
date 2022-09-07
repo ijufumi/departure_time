@@ -19,7 +19,7 @@ type sendGridService struct {
 // Send allows sending mail via SendGrid
 func (service *sendGridService) Send(contents request.SendMail) error {
 	toAddress := mail.NewEmail(contents.ToAddress, contents.ToAddress)
-	fromAddress := mail.NewEmail(contents.FromAddress, contents.FromAddress)
+	fromAddress := mail.NewEmail(service.config.Mail.FromAddress, service.config.Mail.FromAddress)
 	message := mail.NewSingleEmailPlainText(fromAddress, contents.Subject, toAddress, contents.Body)
 	client := service.createClient()
 	_, err := client.Send(message)

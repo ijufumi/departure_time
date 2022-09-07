@@ -15,7 +15,7 @@ func TestSendMailHandler_Send(t *testing.T) {
 	w := httptest.NewRecorder()
 	ginContext, _ := gin.CreateTestContext(w)
 
-	jsonBody := strings.NewReader(`{"to_address":"to@test.com","from_address":"from@test.com","subject": "test subject", "body": "test body"}`)
+	jsonBody := strings.NewReader(`{"to_address":"to@test.com","subject": "test subject", "body": "test body"}`)
 	req, _ := http.NewRequest("POST", "/", jsonBody)
 	ginContext.Request = req
 
@@ -44,29 +44,12 @@ func TestSendMailHandler_Send_ValidationError(t *testing.T) {
 	asserts.Equal(400, w.Result().StatusCode)
 }
 
-// TestSendMailHandler_Send_ValidationMailFormatError_To is email format error ( to address )
+// TestSendMailHandler_Send_ValidationMailFormatError is email format error
 func TestSendMailHandler_Send_ValidationMailFormatError_To(t *testing.T) {
 	w := httptest.NewRecorder()
 	ginContext, _ := gin.CreateTestContext(w)
 
-	jsonBody := strings.NewReader(`{"to_address":"to@test","from_address":"from@test.com","subject": "test subject", "body": "test body"}`)
-	req, _ := http.NewRequest("POST", "/", jsonBody)
-	ginContext.Request = req
-
-	mockSendMailService := mock.NewMockSendMailService(false)
-	sendMailHandler := NewSendMailHandler(mockSendMailService)
-	sendMailHandler.Send(ginContext)
-
-	asserts := assert.New(t)
-	asserts.Equal(400, w.Result().StatusCode)
-}
-
-// TestSendMailHandler_Send_ValidationMailFormatError_From is email format error ( from address )
-func TestSendMailHandler_Send_ValidationMailFormatError_From(t *testing.T) {
-	w := httptest.NewRecorder()
-	ginContext, _ := gin.CreateTestContext(w)
-
-	jsonBody := strings.NewReader(`{"to_address":"to@test.jp","from_address":"from@test","subject": "test subject", "body": "test body"}`)
+	jsonBody := strings.NewReader(`{"to_address":"to@test","subject": "test subject", "body": "test body"}`)
 	req, _ := http.NewRequest("POST", "/", jsonBody)
 	ginContext.Request = req
 
@@ -83,7 +66,7 @@ func TestSendMailHandler_Send_Error(t *testing.T) {
 	w := httptest.NewRecorder()
 	ginContext, _ := gin.CreateTestContext(w)
 
-	jsonBody := strings.NewReader(`{"to_address":"to@test.jp","from_address":"from@test.com","subject": "test subject", "body": "test body"}`)
+	jsonBody := strings.NewReader(`{"to_address":"to@test.jp","subject": "test subject", "body": "test body"}`)
 	req, _ := http.NewRequest("POST", "/", jsonBody)
 	ginContext.Request = req
 

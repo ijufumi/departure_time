@@ -33,7 +33,7 @@ func (service *amazonSESService) Send(contents request.SendMail) error {
 			},
 			CcAddresses: []string{},
 		},
-		FromEmailAddress: aws.String(contents.FromAddress),
+		FromEmailAddress: aws.String(service.config.Mail.FromAddress),
 		Content: &types.EmailContent{
 			Simple: &types.Message{
 				Body: &types.Body{
