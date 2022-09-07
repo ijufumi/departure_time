@@ -32,7 +32,8 @@ type Config struct {
 	}
 
 	App struct {
-		GinMode string `env:"APP_GIN_MODE"`
+		GinMode         string `env:"APP_GIN_MODE"`
+		MailFromAddress string `env:"APP_MAIL_FROM_ADDRESS"`
 
 		Aws struct {
 			AwsAccessKeyID     string `env:"APP_AWS_ACCESS_KEY_ID"`

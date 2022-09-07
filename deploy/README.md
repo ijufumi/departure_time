@@ -81,14 +81,15 @@ And then, fill out the below items.
 
 * application
 
-| Item | Description |
-| ---- | ---- |
-| `APP_GIN_MODE` | The mode of GIN |
+| Item                    | Description                       |
+|-------------------------|-----------------------------------|
+| `APP_GIN_MODE`          | The mode of GIN                   |
+| `APP_MAIL_FROM_ADDRESS` | The from address                  |
 | `APP_AWS_ACCESS_KEY_ID` | A `AWS_ACCESS_KEY_ID` used by app |
-| `APP_AWS_SECRET_KEY` | A `AWS_SECRET_KEY` used by app |
-| `APP_AWS_SES_ENDPOINT` | A `AWS_SES_ENDPOINT` used by app |
-| `APP_AWS_REGION` | A `AWS_REGION` used by app |
-| `APP_SENDGRID_API_KEY` | A `SENDGRID_API_KEY` used by app |
+| `APP_AWS_SECRET_KEY`    | A `AWS_SECRET_KEY` used by app    |
+| `APP_AWS_SES_ENDPOINT`  | A `AWS_SES_ENDPOINT` used by app  |
+| `APP_AWS_REGION`        | A `AWS_REGION` used by app        |
+| `APP_SENDGRID_API_KEY`  | A `SENDGRID_API_KEY` used by app  |
 
 
 ## Initialize CDK
