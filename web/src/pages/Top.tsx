@@ -6,7 +6,6 @@ interface Props { }
 
 const Top: FC<Props> = () => {
   const [toAddress, setToAddress] = useState<string>("");
-  const [fromAddress, setFromAddress] = useState<string>("");
   const [subject, setSubject] = useState<string>("");
   const [body, setBody] = useState<string>("");
   const [successSnackBarOpen, setSuccessSnackBarOpen] = useState<boolean>(false);
@@ -15,10 +14,9 @@ const Top: FC<Props> = () => {
   const sendMail = UsecaseFactory.createSendMail();
 
   const handleSendButton = async () => {
-    const result = await sendMail.send({toAddress, fromAddress, subject, body});
+    const result = await sendMail.send({toAddress, subject, body});
     if (result) {
       setToAddress("");
-      setFromAddress("");
       setSubject("");
       setBody("");
       setSuccessSnackBarOpen(true);
@@ -29,7 +27,7 @@ const Top: FC<Props> = () => {
 
   return (
     <Container sx={{ bgcolor: "#f5f5f5", display: "flex", justifyContent: "center", alignItems: "center", minHeight: "100vh", minWidth: "100vw"}}>
-      <Box sx={{ bgcolor: "#ffffff", borderRadius: "10px" }} width={"600px"} height={"550px"}>
+      <Box sx={{ bgcolor: "#ffffff", borderRadius: "10px" }} width={"600px"} height={"500px"}>
         <Snackbar open={successSnackBarOpen} onClick={() => setSuccessSnackBarOpen(false)} autoHideDuration={1000}>
           <Alert severity="success" variant="filled">Sending message was successful</Alert>
         </Snackbar>
@@ -47,12 +45,6 @@ const Top: FC<Props> = () => {
               </Grid>
               <Grid item xs={8}>
                 <Input type="email" fullWidth={true} value={toAddress} onChange={(e: any) => setToAddress(e.target.value)} />
-              </Grid>
-              <Grid item xs={4}>
-                <Typography variant="h5">{"From Address"}</Typography>
-              </Grid>
-              <Grid item xs={8}>
-                <Input type="email" fullWidth={true} value={fromAddress} onChange={(e: any) => setFromAddress(e.target.value)} />
               </Grid>
               <Grid item xs={4}>
                 <Typography variant="h5">{"Subject"}</Typography>
