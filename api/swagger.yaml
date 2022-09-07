@@ -35,14 +35,10 @@ components:
       x-examples:
         Test mail:
           to_Address: user@ijufumi.jp
-          from_address: root@ijufumi.jp
           subject: Notification
           body: This is test mail of notification
       properties:
         to_address:
-          type: string
-          format: email
-        from_address:
           type: string
           format: email
         subject:
@@ -51,6 +47,5 @@ components:
           type: string
       required:
         - to_address
-        - from_address
         - subject
         - body
