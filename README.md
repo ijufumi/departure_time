@@ -21,6 +21,7 @@ Basically, the package structure follows the [Standard Go Project Layout](https:
 │   │   └── service         # Business logic
 │   └── pkg                 # Common codes
 ├── web                     # Frontend codes
+├── .env.example
 ├── docker-compose.yaml
 ├── Dockerfile
 ├── LICENSE
@@ -42,6 +43,7 @@ Basically, the package structure follows the [Standard Go Project Layout](https:
 Copy `.env.example` to `.env` and edit it.
 Should input these values
 
+* `MAIL_FROM_ADDRESS`
 * `AWS_ACCESS_KEY_ID`
 * `AWS_SECRET_KEY`
 * `AWS_SES_ENDPOINT`
@@ -53,6 +55,8 @@ Should input these values
 ```bash
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILCDKIT=1 docker-compose up --build
 ```
+
+And then, you aceess to [localhost:8080](http://localhost:8080)
 
 ### for AWS
 #### Create environment
