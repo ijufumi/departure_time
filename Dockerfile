@@ -28,7 +28,7 @@ RUN apt-get update \
 
 COPY --from=build /app/main /app/main
 
-COPY --from=build /app/web /app/web
+COPY --from=build /app/web/public /app/web/public
 
 EXPOSE 8080
 
