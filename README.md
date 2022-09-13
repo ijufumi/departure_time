@@ -70,3 +70,8 @@ Execute all tests.
 ```bash
 go test ./...
 ```
+
+## References
+* [Go で AWS SES SDK を使ってメールを送る](https://blog.giftee.dev/2022-01-31-go-aws-ses-sdk/)
+* [AWS SDK for Go API Reference](https://docs.aws.amazon.com/sdk-for-go/api/service/sesv2/)
+* [Go - ドキュメント | SendGrid](https://sendgrid.kke.co.jp/docs/Integrate/Code_Examples/v3_Mail/go.html)
