@@ -74,7 +74,7 @@ Execute all tests.
 go test ./...
 ```
 
-## Needs to improve
+## Points of improvement
 
 ### Select email vendor
 
