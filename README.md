@@ -74,6 +74,25 @@ Execute all tests.
 go test ./...
 ```
 
+## Points of design
+
+### Ease to test
+
+Ensure to write the test code easily, it uses DI to set an instance to others.
+
+
+### Ease to set configuration
+
+This service allows users to get configuration variables from `.env` file and environmental variables of OS.
+
+
+### Ease to run app
+
+On local pc, it uses `Docker Compose` to run app.
+
+Aside from that, it provides the CDK code to create an environment on AWS.
+
+
 ## Points of improvement
 
 ### Select email vendor
