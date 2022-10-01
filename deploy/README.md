@@ -58,7 +58,7 @@ docker build -t [your repository uri]:[tag] .
 and push
 
 ```bash
-docker build -t [your repository uri]:[tag] .
+docker push [your repository uri]:[tag]
 ```
 
 ### Create `.env`
