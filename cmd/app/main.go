@@ -1,4 +1,4 @@
-package main
+package app
 
 import (
 	"github.com/gin-gonic/contrib/static"
@@ -6,7 +6,7 @@ import (
 	"github.com/ijufumi/email-service/internal/app/container"
 )
 
-func main() {
+func RunApp() error {
 	router := gin.Default()
 
 	c := container.NewContainer()
@@ -18,5 +18,5 @@ func main() {
 		api.GET("/health", c.GetHealthHandler().Health)
 		api.POST("/mail/send", c.GetSendMailHandler().Send)
 	}
-	_ = router.Run(":8080")
+	return router.Run(":8080")
 }
