@@ -53,7 +53,7 @@ Should input these values
 
 #### Execute 
 
-Execute the below commnad.
+Execute the below command.
 
 ```bash
 COMPOSE_DOCKER_CLI_BUILD=1 DOCKER_BUILCDKIT=1 docker-compose up --build
