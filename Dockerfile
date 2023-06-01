@@ -6,7 +6,7 @@ COPY . .
 
 RUN go mod download
 
-RUN go build -o main /app/cmd/app/
+RUN go build -o main
 
 WORKDIR /app/web
 
