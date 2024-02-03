@@ -5,25 +5,25 @@
   "author": "Takafumi Iju",
   "license": "MIT",
   "dependencies": {
-    "@emotion/react": "^11.11.1",
+    "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.15.1",
+    "@mui/material": "^5.15.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0"
+    "react-router-dom": "^6.21.3"
   },
   "devDependencies": {
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^6.19.1",
+    "@typescript-eslint/parser": "^6.19.1",
     "eslint": "^8.56.0",
     "eslint-plugin-react": "^7.33.2",
     "html-webpack-plugin": "^5.6.0",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.4",
     "react-devtools": "^5.0.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.3.3",
-    "webpack": "^5.89.0",
+    "webpack": "^5.90.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
