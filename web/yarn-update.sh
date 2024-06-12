@@ -11,6 +11,10 @@ function getListName {
   echo -n $localDepList
 }
 
+if [ -e yarn.lock ]; then
+  rm -f yarn.lock
+fi
+
 depList=$(getListName '.dependencies')
 yarn add $depList
 
